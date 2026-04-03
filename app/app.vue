@@ -639,9 +639,54 @@ const openDoor = () => {
 };
 
 const scrollToDetails = () => {
-  document
-    .getElementById("details-section")
-    ?.scrollIntoView({ behavior: "smooth" });
+  const detailsEl = document.getElementById("details-section");
+  const scrollContainer = document.getElementById("main-content");
+  
+  if (!detailsEl || !scrollContainer) return;
+  
+  // 1. Initial smooth scroll to the details section
+  detailsEl.scrollIntoView({ behavior: "smooth" });
+
+  let scrollAnimation: ReturnType<typeof requestAnimationFrame>;
+
+  // 2. Function to stop the automatic tour if the user wants to take over
+  const stopAutoScroll = () => {
+    cancelAnimationFrame(scrollAnimation);
+    scrollContainer.removeEventListener('touchstart', stopAutoScroll);
+    scrollContainer.removeEventListener('wheel', stopAutoScroll);
+  };
+
+  // Wait for the native smooth scroll to finish, then begin the slow pan
+  setTimeout(() => {
+    const startY = scrollContainer.scrollTop;
+    const targetY = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+    const distance = targetY - startY;
+    
+    if (distance <= 0) return;
+
+    // Slow cinematic pan over 20 seconds
+    const duration = 20000; 
+    let startTime = performance.now();
+
+    const animateScroll = (currentTime: number) => {
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      scrollContainer.scrollTop = startY + (distance * progress);
+
+      if (progress < 1) {
+        scrollAnimation = requestAnimationFrame(animateScroll);
+      } else {
+        stopAutoScroll();
+      }
+    };
+
+    // Allow user to break out of the animation instantly
+    scrollContainer.addEventListener('touchstart', stopAutoScroll, { passive: true });
+    scrollContainer.addEventListener('wheel', stopAutoScroll, { passive: true });
+    
+    scrollAnimation = requestAnimationFrame(animateScroll);
+  }, 1000);
 };
 
 // Target Date: 30 May 2026, 11:30 AM
