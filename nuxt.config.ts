@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   modules: ["@morev/vue-transitions", "@nuxtjs/tailwindcss", "@nuxtjs/ngrok"],
   vite: {
     optimizeDeps: {
-      include: ["@vue/devtools-core", "@vue/devtools-kit"],
+      include: ["@vue/devtools-core", "@vue/devtools-kit", "lucide-vue-next"],
     },
     server: {
       allowedHosts: ["encouragedly-uncontrastive-jaylen.ngrok-free.dev"],
