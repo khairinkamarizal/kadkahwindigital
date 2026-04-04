@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: true },
-  modules: ["@morev/vue-transitions", "@nuxtjs/tailwindcss", "@nuxtjs/ngrok"],
+  modules: ["@morev/vue-transitions", "@nuxtjs/tailwindcss"],
   vite: {
     optimizeDeps: {
       include: ["@vue/devtools-core", "@vue/devtools-kit", "lucide-vue-next"],
@@ -29,9 +29,5 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: ["encouragedly-uncontrastive-jaylen.ngrok-free.dev"],
     },
-  },
-  ngrok: {
-    authtoken: "3Bn4kaNPqYGNQTQNjzAuibdhmBy_4mekabWsrxGRm7sy7NRsK",
-    production: true,
   },
 });
