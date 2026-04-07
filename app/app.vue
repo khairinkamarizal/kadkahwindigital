@@ -656,7 +656,7 @@
         frameborder="0"
         allow="autoplay; encrypted-media; picture-in-picture"
         @load="onYoutubeIframeLoad"
-        style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;"
+        style="position: fixed; top: -1px; left: -1px; width: 1px; height: 1px; opacity: 0; pointer-events: none; z-index: -9999;"
         aria-hidden="true"></iframe>
     </div>
   </div>
@@ -685,9 +685,10 @@ const isPlaying = ref(false);
 const activePanel = ref<string | null>(null);
 const activeIndex = ref<number>(-1);
 const youtubeUrl =
-  "https://www.youtube.com/embed/d8UzgqKY_tg?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=d8UzgqKY_tg&playsinline=1&controls=0";
+  "https://www.youtube.com/embed/d8UzgqKY_tg?enablejsapi=1&autoplay=0&loop=1&playlist=d8UzgqKY_tg&playsinline=1&controls=0&mute=0";
 const youtubeSrc = ref("");
 const youtubeIframe = ref<HTMLIFrameElement | null>(null);
+let youtubePlayer: any = null;
 
 const setYoutubeSrc = () => {
   if (!youtubeSrc.value) {
@@ -736,7 +737,7 @@ const openDoor = () => {
 
   setTimeout(() => {
     playYoutubeVideo();
-  }, 300);
+  }, 500);
 
   setTimeout(() => {
     isFullyOpened.value = true;
@@ -746,14 +747,34 @@ const openDoor = () => {
 const playYoutubeVideo = () => {
   if (!youtubeIframe.value?.contentWindow) return;
 
-  youtubeIframe.value.contentWindow.postMessage(
-    JSON.stringify({ event: "command", func: "playVideo", args: "" }),
-    "*"
-  );
+  // Try postMessage method first
+  try {
+    youtubeIframe.value.contentWindow.postMessage(
+      JSON.stringify({ event: "command", func: "playVideo", args: "" }),
+      "*"
+    );
+  } catch (e) {
+    console.log("PostMessage failed, retrying...");
+  }
+
+  // For iOS Safari, try again after a slight delay
+  setTimeout(() => {
+    try {
+      youtubeIframe.value?.contentWindow?.postMessage(
+        JSON.stringify({ event: "command", func: "playVideo", args: "" }),
+        "*"
+      );
+    } catch (e) {
+      console.log("Retry postMessage failed");
+    }
+  }, 200);
 };
 
 const onYoutubeIframeLoad = () => {
-  playYoutubeVideo();
+  // Delay to ensure iframe is fully loaded
+  setTimeout(() => {
+    playYoutubeVideo();
+  }, 500);
 };
 
 const scrollToDetails = () => {
