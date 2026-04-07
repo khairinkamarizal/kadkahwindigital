@@ -646,18 +646,11 @@
           stroke-width="1.5" />
       </button>
 
-      <iframe
-        v-if="isPlaying"
-        ref="youtubeIframe"
-        id="youtube-player"
-        width="1"
-        height="1"
-        :src="youtubeSrc"
-        frameborder="0"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        @load="onYoutubeIframeLoad"
-        style="position: fixed; top: -1px; left: -1px; width: 1px; height: 1px; opacity: 0; pointer-events: none; z-index: -9999;"
-        aria-hidden="true"></iframe>
+      <audio
+        ref="audioEl"
+        loop
+        src="/music.mp3"
+        preload="auto"></audio>
     </div>
   </div>
 </template>
@@ -684,21 +677,13 @@ const isFullyOpened = ref(false);
 const isPlaying = ref(false);
 const activePanel = ref<string | null>(null);
 const activeIndex = ref<number>(-1);
-const youtubeUrl =
-  "https://www.youtube.com/embed/d8UzgqKY_tg?enablejsapi=1&autoplay=0&loop=1&playlist=d8UzgqKY_tg&playsinline=1&controls=0&mute=0";
-const youtubeSrc = ref("");
-const youtubeIframe = ref<HTMLIFrameElement | null>(null);
-let youtubePlayer: any = null;
-
-const setYoutubeSrc = () => {
-  if (!youtubeSrc.value) {
-    youtubeSrc.value = youtubeUrl;
-  }
-};
+const audioEl = ref<HTMLAudioElement | null>(null);
 
 const togglePlayback = () => {
-  if (!isPlaying.value) {
-    setYoutubeSrc();
+  if (isPlaying.value) {
+    audioEl.value?.pause();
+  } else {
+    audioEl.value?.play();
   }
   isPlaying.value = !isPlaying.value;
 };
@@ -733,48 +718,14 @@ const togglePanel = (id: string, index: number) => {
 const openDoor = () => {
   isOpening.value = true;
   isPlaying.value = true;
-  setYoutubeSrc();
-
-  setTimeout(() => {
-    playYoutubeVideo();
-  }, 500);
+  // Call play() synchronously inside the gesture handler for iOS
+  audioEl.value?.play().catch((err) => {
+    console.log("Audio play failed:", err);
+  });
 
   setTimeout(() => {
     isFullyOpened.value = true;
   }, 2000);
-};
-
-const playYoutubeVideo = () => {
-  if (!youtubeIframe.value?.contentWindow) return;
-
-  // Try postMessage method first
-  try {
-    youtubeIframe.value.contentWindow.postMessage(
-      JSON.stringify({ event: "command", func: "playVideo", args: "" }),
-      "*"
-    );
-  } catch (e) {
-    console.log("PostMessage failed, retrying...");
-  }
-
-  // For iOS Safari, try again after a slight delay
-  setTimeout(() => {
-    try {
-      youtubeIframe.value?.contentWindow?.postMessage(
-        JSON.stringify({ event: "command", func: "playVideo", args: "" }),
-        "*"
-      );
-    } catch (e) {
-      console.log("Retry postMessage failed");
-    }
-  }, 200);
-};
-
-const onYoutubeIframeLoad = () => {
-  // Delay to ensure iframe is fully loaded
-  setTimeout(() => {
-    playYoutubeVideo();
-  }, 500);
 };
 
 const scrollToDetails = () => {
