@@ -26,7 +26,10 @@ export default defineNuxtConfig({
             "Jemputan ke Majlis Perkahwinan Puteri Nurul Syamimi & Muhamad Hafiz pada 30 Mei 2026.",
         },
         { property: "og:type", content: "website" },
-        { name: "theme-color", content: "#660B05" },
+        { name: "theme-color", content: "#701c0a" },
+        { name: "apple-mobile-web-app-capable", content: "yes" },
+        { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+        { name: "apple-mobile-web-app-title", content: "Mimi & Hafiz" },
       ],
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },

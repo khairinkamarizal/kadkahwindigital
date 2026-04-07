@@ -11,12 +11,9 @@
     <div
       class="relative z-10 w-full h-[100dvh] sm:h-[850px] max-w-[430px] bg-[#701c0a] sm:rounded-[3.5rem] sm:border-[12px] sm:border-black shadow-[0_30px_80px_rgba(0,0,0,0.5),0_15px_40px_rgba(0,0,0,0.3),0_0_100px_rgba(0,0,0,0.2)] overflow-hidden sm:ring-[2px] sm:ring-white/50 flex flex-col">
       <div>
-        <!-- Background -->
         <div
           class="absolute inset-0 pointer-events-none bg-[url('/songket.png')] bg-repeat opacity-50"
           style="background-size: 250px"></div>
-
-        <!-- Left songket border (repeating) -->
         <div
           class="absolute left-0 top-0 bottom-0 w-1/2 pointer-events-none z-[50]"
           style="
@@ -26,7 +23,6 @@
             background-position: left top;
           "
           aria-hidden="true"></div>
-        <!-- Right songket border (repeating, mirrored) -->
         <div
           class="absolute right-0 top-0 bottom-0 w-1/2 pointer-events-none z-[50]"
           style="
@@ -154,14 +150,11 @@
           </div>
         </header>
 
-        <!-- Parallax Reveal Section -->
         <div
           class="rounded-t-3xl relative z-[150] bg-gradient-to-b from-transparent via-[#701c0a] to-[#701c0a] shadow-[0_-50px_100px_rgba(0,0,0,0.5)] flex flex-col">
-          <!-- Internal Songket Overlay to maintain consistency -->
           <div
             class="rounded-t-3xl absolute inset-0 pointer-events-none bg-[url('/songket.png')] bg-repeat "
             style="background-size: 250px"></div>
-          <!-- Left songket border (repeating) -->
           <div
             class="rounded-t-3xl absolute left-0 top-0 bottom-0 w-1/3 pointer-events-none z-[5]"
             style="
@@ -171,7 +164,6 @@
               background-position: left top;
             "
             aria-hidden="true"></div>
-          <!-- Right songket border (repeating, mirrored) -->
           <div
             class="rounded-t-3xl absolute right-0 top-0 bottom-0 w-1/3 pointer-events-none z-[5]"
             style="
@@ -253,7 +245,6 @@
           </section>
 
           <section class="relative z-10 w-full py-20 px-6 space-y-6">
-            <!-- Venue Card -->
             <div
               class="relative w-full p-8 from-[#d4af37] to-[#c7a32b] bg-gradient-to-b rounded-[1.5rem] border border-white/20 shadow-xl space-y-6 animate-fade-in-up"
               style="animation-delay: 0.3s">
@@ -305,8 +296,6 @@
                 </a>
               </div>
             </div>
-
-            <!-- Date & Time Card -->
             <div
               class="relative w-full p-8 from-[#d4af37] to-[#c7a32b] bg-gradient-to-b rounded-[1.5rem] border border-white/20 shadow-xl space-y-6 animate-fade-in-up"
               style="animation-delay: 0.5s">
@@ -430,14 +419,11 @@
           </section>
 
 <footer class="relative z-10 space-y-10 pb-36 pt-16 text-center">
-  <!-- Top Decorative Element -->
   <div class="flex items-center justify-center space-x-4">
     <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
     <Heart class="h-6 w-6 text-[#d4af37]/60" :stroke-width="1.5" />
     <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
   </div>
-
-  <!-- Main Identity -->
   <div class="space-y-3">
     <h2
       class="font-outfit text-sm font-medium uppercase tracking-[0.5em] text-[#fdf8f5]/80"
@@ -455,15 +441,11 @@
       #MimiUntukHafiz
     </p>
   </div>
-
-  <!-- Divider Icon -->
   <div class="flex items-center justify-center space-x-4">
     <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
     <Sparkles class="h-6 w-6 text-[#d4af37]/60" :stroke-width="1.5" />
     <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
   </div>
-
-  <!-- Credits Section -->
   <div class="space-y-4">
     <p
       class="font-outfit text-[10px] font-normal uppercase tracking-[0.2em] text-[#d4af37]/50"
@@ -667,6 +649,7 @@
       <iframe
         v-if="isPlaying"
         ref="youtubeIframe"
+        id="youtube-player"
         width="1"
         height="1"
         :src="youtubeSrc"
@@ -702,7 +685,7 @@ const isPlaying = ref(false);
 const activePanel = ref<string | null>(null);
 const activeIndex = ref<number>(-1);
 const youtubeUrl =
-  "https://www.youtube.com/embed/d8UzgqKY_tg?enablejsapi=1&autoplay=1&mute=0&loop=1&playlist=d8UzgqKY_tg&playsinline=1";
+  "https://www.youtube.com/embed/d8UzgqKY_tg?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=d8UzgqKY_tg&playsinline=1&controls=0";
 const youtubeSrc = ref("");
 const youtubeIframe = ref<HTMLIFrameElement | null>(null);
 
@@ -752,17 +735,25 @@ const openDoor = () => {
   setYoutubeSrc();
 
   setTimeout(() => {
+    playYoutubeVideo();
+  }, 300);
+
+  setTimeout(() => {
     isFullyOpened.value = true;
   }, 2000);
 };
 
-const onYoutubeIframeLoad = () => {
+const playYoutubeVideo = () => {
   if (!youtubeIframe.value?.contentWindow) return;
 
   youtubeIframe.value.contentWindow.postMessage(
-    '{"event":"command","func":"playVideo","args":""}',
+    JSON.stringify({ event: "command", func: "playVideo", args: "" }),
     "*"
   );
+};
+
+const onYoutubeIframeLoad = () => {
+  playYoutubeVideo();
 };
 
 const scrollToDetails = () => {
@@ -771,7 +762,6 @@ const scrollToDetails = () => {
 
   if (!detailsEl || !scrollContainer) return;
 
-  // 1. Initial smooth scroll to the details section
   const containerTop = scrollContainer.getBoundingClientRect().top;
   const elementTop = detailsEl.getBoundingClientRect().top;
   const scrollTarget = elementTop - containerTop + scrollContainer.scrollTop;
@@ -783,14 +773,12 @@ const scrollToDetails = () => {
 
   let scrollAnimation: ReturnType<typeof requestAnimationFrame>;
 
-  // 2. Function to stop the automatic tour if the user wants to take over
   const stopAutoScroll = () => {
     cancelAnimationFrame(scrollAnimation);
     scrollContainer.removeEventListener("touchstart", stopAutoScroll);
     scrollContainer.removeEventListener("wheel", stopAutoScroll);
   };
 
-  // Wait for the native smooth scroll to finish, then begin the slow pan
   setTimeout(() => {
     const startY = scrollContainer.scrollTop;
     const targetY = scrollContainer.scrollHeight - scrollContainer.clientHeight;
@@ -798,7 +786,6 @@ const scrollToDetails = () => {
 
     if (distance <= 0) return;
 
-    // Slow cinematic pan over 20 seconds
     const duration = 20000;
     let startTime = performance.now();
 
@@ -815,7 +802,6 @@ const scrollToDetails = () => {
       }
     };
 
-    // Allow user to break out of the animation instantly
     scrollContainer.addEventListener("touchstart", stopAutoScroll, {
       passive: true,
     });
@@ -827,7 +813,6 @@ const scrollToDetails = () => {
   }, 1000);
 };
 
-// Target Date: 30 May 2026, 11:30 AM
 const targetDate = new Date("2026-05-30T11:30:00").getTime();
 const countdown = ref({ Hari: 0, Jam: 0, Minit: 0, Saat: 0 });
 
