@@ -142,7 +142,7 @@
               class="group flex flex-col items-center gap-3 py-2 px-4 rounded-xl active:bg-white/5 transition-colors animate-fade-in-up"
               style="animation-delay: 1.4s">
               <span
-                class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37]/80 group-hover:text-[#d4af37] font-outfit font-medium transition-colors"
+                class="text-xs tracking-[0.3em] uppercase text-[#d4af37]/80 group-hover:text-[#d4af37] font-outfit font-semibold transition-colors"
                 >Buka Jemputan</span
               >
               <div
@@ -156,14 +156,14 @@
 
         <!-- Parallax Reveal Section -->
         <div
-          class="relative z-[150] bg-gradient-to-b from-transparent via-[#701c0a] to-[#701c0a] shadow-[0_-50px_100px_rgba(0,0,0,0.5)] flex flex-col">
+          class="rounded-t-3xl relative z-[150] bg-gradient-to-b from-transparent via-[#701c0a] to-[#701c0a] shadow-[0_-50px_100px_rgba(0,0,0,0.5)] flex flex-col">
           <!-- Internal Songket Overlay to maintain consistency -->
           <div
-            class="absolute inset-0 pointer-events-none bg-[url('/songket.png')] bg-repeat"
+            class="rounded-t-3xl absolute inset-0 pointer-events-none bg-[url('/songket.png')] bg-repeat "
             style="background-size: 250px"></div>
           <!-- Left songket border (repeating) -->
           <div
-            class="absolute left-0 top-0 bottom-0 w-1/3 pointer-events-none z-[5]"
+            class="rounded-t-3xl absolute left-0 top-0 bottom-0 w-1/3 pointer-events-none z-[5]"
             style="
               background-image: url(&quot;/sidesongket.svg&quot;);
               background-repeat: repeat-y;
@@ -173,7 +173,7 @@
             aria-hidden="true"></div>
           <!-- Right songket border (repeating, mirrored) -->
           <div
-            class="absolute right-0 top-0 bottom-0 w-1/3 pointer-events-none z-[5]"
+            class="rounded-t-3xl absolute right-0 top-0 bottom-0 w-1/3 pointer-events-none z-[5]"
             style="
               background-image: url(&quot;/sidesongket.svg&quot;);
               background-repeat: repeat-y;
@@ -184,7 +184,7 @@
             aria-hidden="true"></div>
           <section
             id="details-section"
-            class="relative z-10 w-full py-20 px-6 text-center space-y-10">
+            class="rounded-t-3xl relative z-10 w-full py-20 px-6 text-center space-y-10">
             <div class="flex flex-col items-center gap-0">
               <img
                 src="/top.svg"
@@ -429,20 +429,66 @@
             </div>
           </section>
 
-          <footer class="pt-16 pb-48 text-center relative z-10">
-            <Heart
-              class="mx-auto w-8 h-8 text-[#d4af37]/60 mb-6"
-              :stroke-width="1.5" />
-            <p
-              class="text-[11px] tracking-[0.4em] text-[#fdf8f5]/70 font-outfit font-medium uppercase mb-3">
-              Mimi & Hafiz • 2026
-            </p>
-            <p
-              class="text-[10px] text-[#d4af37]/80 uppercase tracking-widest font-outfit font-light">
-              #MimiUntukHafiz
-            </p>
-          </footer>
-        </div>
+<footer class="relative z-10 space-y-10 pb-36 pt-16 text-center">
+  <!-- Top Decorative Element -->
+  <div class="flex items-center justify-center space-x-4">
+    <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
+    <Heart class="h-6 w-6 text-[#d4af37]/60" :stroke-width="1.5" />
+    <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
+  </div>
+
+  <!-- Main Identity -->
+  <div class="space-y-3">
+    <h2
+      class="font-outfit text-sm font-medium uppercase tracking-[0.5em] text-[#fdf8f5]/80"
+    >
+      Mimi & Hafiz
+    </h2>
+    <div
+      class="mx-auto w-fit border-y border-[#d4af37]/20 py-2 font-outfit text-[10px] font-light uppercase tracking-[0.3em] text-[#d4af37]/80"
+    >
+      20 &bull; 02 &bull; 2026
+    </div>
+    <p
+      class="font-outfit text-xs font-light uppercase tracking-widest text-[#d4af37]/60"
+    >
+      #MimiUntukHafiz
+    </p>
+  </div>
+
+  <!-- Divider Icon -->
+  <div class="flex items-center justify-center space-x-4">
+    <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
+    <Sparkles class="h-6 w-6 text-[#d4af37]/60" :stroke-width="1.5" />
+    <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
+  </div>
+
+  <!-- Credits Section -->
+  <div class="space-y-4">
+    <p
+      class="font-outfit text-[10px] font-normal uppercase tracking-[0.2em] text-[#d4af37]/50"
+    >
+      Created with love by
+    </p>
+    <div
+      class="flex flex-col items-center justify-center space-y-2 font-outfit text-xs tracking-wide"
+    >
+      <a
+        href="https://khair.ink"
+        class="text-[#fdf8f5]/70 transition-colors active:text-[#d4af37] uppercase"
+      >
+        Khairin Kamarizal
+      </a>
+      <span class="text-[#d4af37]/60 text-sm">&</span>
+      <a
+        href="https://puterisyarafana.xyz"
+        class="text-[#fdf8f5]/70 transition-colors active:text-[#d4af37] uppercase"
+      >
+        Puteri Syarafana
+      </a>
+    </div>
+  </div>
+</footer>        </div>
       </main>
 
       <div
@@ -606,7 +652,7 @@
       </transition>
 
       <button
-        @click="isPlaying = !isPlaying"
+        @click="togglePlayback"
         class="absolute top-6 right-6 z-[100] w-12 h-12 bg-black/40 backdrop-blur-md rounded-full border border-[#d4af37]/30 flex items-center justify-center text-[#d4af37] hover:bg-white/10 hover:scale-105 active:scale-95 transition-all shadow-lg">
         <VolumeX
           v-if="!isPlaying"
@@ -620,18 +666,21 @@
 
       <iframe
         v-if="isPlaying"
-        width="0"
-        height="0"
-        src="https://www.youtube.com/embed/d8UzgqKY_tg?autoplay=1&mute=0&loop=1&playlist=d8UzgqKY_tg"
+        ref="youtubeIframe"
+        width="1"
+        height="1"
+        :src="youtubeSrc"
         frameborder="0"
-        allow="autoplay; encrypted-media"
-        class="hidden"></iframe>
+        allow="autoplay; encrypted-media; picture-in-picture"
+        @load="onYoutubeIframeLoad"
+        style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;"
+        aria-hidden="true"></iframe>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, defineComponent, h } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import {
   ArrowRight,
   Sparkles,
@@ -652,6 +701,23 @@ const isFullyOpened = ref(false);
 const isPlaying = ref(false);
 const activePanel = ref<string | null>(null);
 const activeIndex = ref<number>(-1);
+const youtubeUrl =
+  "https://www.youtube.com/embed/d8UzgqKY_tg?enablejsapi=1&autoplay=1&mute=0&loop=1&playlist=d8UzgqKY_tg&playsinline=1";
+const youtubeSrc = ref("");
+const youtubeIframe = ref<HTMLIFrameElement | null>(null);
+
+const setYoutubeSrc = () => {
+  if (!youtubeSrc.value) {
+    youtubeSrc.value = youtubeUrl;
+  }
+};
+
+const togglePlayback = () => {
+  if (!isPlaying.value) {
+    setYoutubeSrc();
+  }
+  isPlaying.value = !isPlaying.value;
+};
 
 const navItems = [
   {
@@ -683,9 +749,20 @@ const togglePanel = (id: string, index: number) => {
 const openDoor = () => {
   isOpening.value = true;
   isPlaying.value = true;
+  setYoutubeSrc();
+
   setTimeout(() => {
     isFullyOpened.value = true;
   }, 2000);
+};
+
+const onYoutubeIframeLoad = () => {
+  if (!youtubeIframe.value?.contentWindow) return;
+
+  youtubeIframe.value.contentWindow.postMessage(
+    '{"event":"command","func":"playVideo","args":""}',
+    "*"
+  );
 };
 
 const scrollToDetails = () => {
