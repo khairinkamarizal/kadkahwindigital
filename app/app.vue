@@ -153,7 +153,7 @@
         <div
           class="rounded-t-3xl relative z-[150] bg-gradient-to-b from-transparent via-[#701c0a] to-[#701c0a] shadow-[0_-50px_100px_rgba(0,0,0,0.5)] flex flex-col">
           <div
-            class="rounded-t-3xl absolute inset-0 pointer-events-none bg-[url('/songket.png')] bg-repeat "
+            class="rounded-t-3xl absolute inset-0 pointer-events-none bg-[url('/songket.png')] bg-repeat"
             style="background-size: 250px"></div>
           <div
             class="rounded-t-3xl absolute left-0 top-0 bottom-0 w-1/3 pointer-events-none z-[5]"
@@ -418,59 +418,57 @@
             </div>
           </section>
 
-<footer class="relative z-10 space-y-10 pb-36 pt-16 text-center">
-  <div class="flex items-center justify-center space-x-4">
-    <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
-    <Heart class="h-6 w-6 text-[#d4af37]/60" :stroke-width="1.5" />
-    <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
-  </div>
-  <div class="space-y-3">
-    <h2
-      class="font-outfit text-sm font-medium uppercase tracking-[0.5em] text-[#fdf8f5]/80"
-    >
-      Mimi & Hafiz
-    </h2>
-    <div
-      class="mx-auto w-fit border-y border-[#d4af37]/20 py-2 font-outfit text-[10px] font-light uppercase tracking-[0.3em] text-[#d4af37]/80"
-    >
-      20 &bull; 02 &bull; 2026
-    </div>
-    <p
-      class="font-outfit text-xs font-light uppercase tracking-widest text-[#d4af37]/60"
-    >
-      #MimiUntukHafiz
-    </p>
-  </div>
-  <div class="flex items-center justify-center space-x-4">
-    <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
-    <Sparkles class="h-6 w-6 text-[#d4af37]/60" :stroke-width="1.5" />
-    <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
-  </div>
-  <div class="space-y-4">
-    <p
-      class="font-outfit text-[10px] font-normal uppercase tracking-[0.2em] text-[#d4af37]/50"
-    >
-      Created with love by
-    </p>
-    <div
-      class="flex flex-col items-center justify-center space-y-2 font-outfit text-xs tracking-wide"
-    >
-      <a
-        href="https://khair.ink"
-        class="text-[#fdf8f5]/70 transition-colors active:text-[#d4af37] uppercase"
-      >
-        Khairin Kamarizal
-      </a>
-      <span class="text-[#d4af37]/60 text-sm">&</span>
-      <a
-        href="https://puterisyarafana.xyz"
-        class="text-[#fdf8f5]/70 transition-colors active:text-[#d4af37] uppercase"
-      >
-        Puteri Syarafana
-      </a>
-    </div>
-  </div>
-</footer>        </div>
+          <footer class="relative z-10 space-y-10 pb-36 pt-16 text-center">
+            <div class="flex items-center justify-center space-x-4">
+              <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
+              <Heart
+                class="h-6 w-6 text-[#d4af37]/60"
+                :stroke-width="1.5" />
+              <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
+            </div>
+            <div class="space-y-3">
+              <h2
+                class="font-outfit text-sm font-medium uppercase tracking-[0.5em] text-[#fdf8f5]/80">
+                Mimi & Hafiz
+              </h2>
+              <div
+                class="mx-auto w-fit border-y border-[#d4af37]/20 py-2 font-outfit text-[10px] font-light uppercase tracking-[0.3em] text-[#d4af37]/80">
+                30 &bull; 05 &bull; 2026
+              </div>
+              <p
+                class="font-outfit text-xs font-light uppercase tracking-widest text-[#d4af37]/60">
+                #MimiUntukHafiz
+              </p>
+            </div>
+            <div class="flex items-center justify-center space-x-4">
+              <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
+              <Sparkles
+                class="h-6 w-6 text-[#d4af37]/60"
+                :stroke-width="1.5" />
+              <div class="h-[1px] w-8 bg-[#d4af37]/30"></div>
+            </div>
+            <div class="space-y-4">
+              <p
+                class="font-outfit text-[10px] font-normal uppercase tracking-[0.2em] text-[#d4af37]/50">
+                Created with love by
+              </p>
+              <div
+                class="flex flex-col items-center justify-center space-y-2 font-outfit text-xs tracking-wide">
+                <a
+                  href="https://khair.ink"
+                  class="text-[#fdf8f5]/70 transition-colors active:text-[#d4af37] uppercase">
+                  Khairin Kamarizal
+                </a>
+                <span class="text-[#d4af37]/60 text-sm">&</span>
+                <a
+                  href="https://puterisyarafana.xyz"
+                  class="text-[#fdf8f5]/70 transition-colors active:text-[#d4af37] uppercase">
+                  Puteri Syarafana
+                </a>
+              </div>
+            </div>
+          </footer>
+        </div>
       </main>
 
       <div
